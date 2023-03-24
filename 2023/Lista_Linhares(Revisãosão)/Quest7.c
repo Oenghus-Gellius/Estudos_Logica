@@ -6,18 +6,36 @@ números.
 
 #include <stdio.h>
 
-int mail(){
+int main(){
     char sinal;
     float n1,n2,resultado;
 
     printf("\n Insira o primeiro numero.:");
-    scanf("%c",&sinal);
+    scanf("%f",&n1);
     printf("\n Insira o sinal.:");
-    scanf("%d",&n1);
+    scanf("%c",&sinal);
     printf("\n Insira o segundo numero.:");
-    scanf("%d",&n2);
-
+    scanf("%f",&n2);
+//Não esta rodando
+    switch (sinal)
+    {
+    case '+':
+        resultado=n1+n2;
+        break;
+    case '-':
+        resultado=n1-n2;
+        break;
+    case '*':
+        resultado=n1*n2;
+        break;
+    case '/':
+        resultado=n1/n2;
+        break;
     
-    printf("O resultado da operação %c é.: %d",sinal,resultado);
+    default:
+        break;
+    }
+    printf("\nO resultado da operação %c é.: %.2f",sinal,resultado);
+    
     return 0;
 }

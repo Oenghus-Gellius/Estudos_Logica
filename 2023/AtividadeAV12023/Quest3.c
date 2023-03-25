@@ -74,16 +74,16 @@ int main(){
         totalCal=totalCal+20;
         break;
     case 2:
-        printf("\nCha");
-        totalCal=totalCal+20;
+        printf("\nSuco de laranja ");
+        totalCal=totalCal+70;
         break;
     case 3:
-        printf("\nCha");
-        totalCal=totalCal+20;
+        printf("\nSuco de melão ");
+        totalCal=totalCal+100;
         break;
     case 4:
-        printf("\nCha");
-        totalCal=totalCal+20;
+        printf("\nRefrigerante diet");
+        totalCal=totalCal+65;
         break;
 
     default:

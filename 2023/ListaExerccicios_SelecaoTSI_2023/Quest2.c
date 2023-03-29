@@ -49,7 +49,7 @@ int main(){
         meio=b;
         menor=a;
     }
-    printf("em or dem crescente os numeros são.: %d - %d - %d",menor,meio,maior);
+    printf("em ordem crescente os numeros são.: %d - %d - %d",menor,meio,maior);
 
     return 0;
 }

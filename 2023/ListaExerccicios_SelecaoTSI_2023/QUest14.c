@@ -1,15 +1,10 @@
 /*
-Autor.: Bolívar Augusto Dias Jr
-Data.: 30/03-23
-Questão 02)
-Faça um programa que calcule a área de uma parede retangular e mostre também o menor
-número de latas de tintas a serem compradas para pintá-la tendo o menor desperdício
-possível. Consumo de tinta é de 3 l/m2
- .
-As medidas são inteiras são valores inteiros. No mercado existem latas com capacidade de
-9 , 5 e 1 litro.
+14) Faça um algoritmo que calcule a área de uma parede retangular e mostre também o menor
+número de latas de tintas a serem compradas para pintá-la tendo o menor desperdício possível.
+Consumo de tinta é 3,0 l/m2
+.
+As medidas são inteiras
 */
-
 #include <stdio.h>
 int main(){
     int base,alt,area,litrosTin,lat9,lat5,lat1;

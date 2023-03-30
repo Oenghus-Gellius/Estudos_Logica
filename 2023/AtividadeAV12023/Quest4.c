@@ -1,4 +1,6 @@
 /*
+Autor.: Bolívar Augusto Dias Jr
+Data.: 30/03-23
 Questão 04)
 Faça um programa para determinar a situação (APROVADO/EXAME/REPROVADO) de
 um aluno, dado a sua frequência (FREQ) (porcentagem de 0 a 100%) e sua nota (NOTA)

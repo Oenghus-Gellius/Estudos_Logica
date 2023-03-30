@@ -15,11 +15,7 @@ Obs. Valiudar a entrada de dados.
 #include <stdio.h>
 int main(){
     int prato,sobremesa,bebida,totalCal;
-/*    Prato          Sobremesa             Bebida              
-1-  Vegetariano      Abacaxi               Chá                 
-2-  Peixe            Sorvete diet          Suco de laranja     
-3-  Frango           Mousse diet           Suco de melão       
-4-  Carne            Mousse chocolate      Refrigerante diet*/
+
     printf("\tPrato:\n1-Vegetariano \n2-Peixe \n3-Frango \n3-Carne");
     printf("\nInsira o numero do seu prato.:");
     scanf("%d",&prato);

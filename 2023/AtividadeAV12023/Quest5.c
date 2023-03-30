@@ -1,4 +1,6 @@
 /*
+Autor.: Bolívar Augusto Dias Jr
+Data.: 30/03-23
 Faça um programa que tenha como entrada o código da instituição financeira e o saldo de
 um cliente e apresente sua classificação. Validar os dados de entrada.
 */

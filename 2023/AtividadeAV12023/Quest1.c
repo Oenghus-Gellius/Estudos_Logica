@@ -1,4 +1,6 @@
 /*
+Autor.: Bolívar Augusto Dias Jr
+Data.: 30/03-23
 Questão 01) 
 Escrever um programa que tenha como número de matrícula, as 3 notas obtidas por um aluno
 nas 3 verificações e a média dos exercícios que fazem parte da avaliação. Calcular a média de

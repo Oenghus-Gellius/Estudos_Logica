@@ -12,7 +12,7 @@ Código Cargo Percentual
 
 int main(){
     int cargo;
-    float salario,salarioFinal;
+    float salario,salarioFinal,aumento;
 
     printf("Insira o codigo do cargo.:");
     scanf("%d",&cargo);
@@ -30,8 +30,11 @@ int main(){
         salarioFinal=salario+salario*0.30;
         break;    
     default:
+        salarioFinal=salario+salario*0.40;
+        
         break;
     }
-    printf("Cargo codigo %d - Salario - %.2f - Salario Final - %.2f",cargo,salario,salarioFinal);
+    aumento=salarioFinal-salario;
+    printf("Cargo codigo %d - Salario - %.2f - Salario Final - %.2f - Aumento de %.2f",cargo,salario,salarioFinal,aumento);
     return 0;
 }

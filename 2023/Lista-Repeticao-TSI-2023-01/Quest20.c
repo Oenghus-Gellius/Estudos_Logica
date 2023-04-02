@@ -5,11 +5,41 @@ quando for lido um número negativo.
 */
 #include<stdio.h>
 int main(){
+    int num,qtd1=0,qtd2=0,qtd3=0,qtd4=0,count=0;
 
     do
     {
-        /* code */
-    } while (count>=0);
-    
+        printf("Insira o numero.:");
+        scanf("%d",&num);
+        if (num>=0 && num<=100)
+        {
+            if (num<=25)
+            {
+                qtd1++;
+            }
+            else
+                if (num<=50)
+                {
+                    qtd2++;
+                }
+                else
+                    if (num<=75)
+                    {
+                        qtd3++;
+                    }
+                    else
+                    {
+                        qtd4++;
+                    }
+            count++; 
+        }
+    } while (num>=0);
+    if (count>0)
+    {
+        printf("\n%d\tEntre 0 e 25.",qtd1);
+        printf("\n%d\tEntre 26 e 50.",qtd2);
+        printf("\n%d\tEntre 51 e 75.",qtd3);
+        printf("\n%d\tEntre 76 e 100.",qtd4);
+    }
     return 0;
 }

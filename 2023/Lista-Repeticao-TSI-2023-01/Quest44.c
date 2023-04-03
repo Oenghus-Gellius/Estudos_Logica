@@ -18,17 +18,16 @@ que respondeu ruim
 #include<stdio.h>
 int main(){
     const int CINE = 5;
-    int i,idade,qtdA=0,qtdD=0,qtdMediaIdRuim=0,qtdE=0,maiorIdPess,maiorIdD,maiorIdA,diferAD;
-    char nota;
+    int nota,i,idade,qtdA=0,qtdD=0,qtdMediaIdRuim=0,qtdE=0,maiorIdPess,maiorIdD,maiorIdA,diferAD;
     float mediaIdRuim=0,percPess=0;
 
     for (i = 0; i < CINE; i++)
     {
         printf("\nSua idade.:");
         scanf("%d",&idade);
-        printf("A: Ótimo\tB: Bom\tC: Regular\tD: Ruim\tE: Péssimo\nSua opinião em relação ao filme, segundo as seguintes notas:");
-        scanf("%c",&nota);
-        if (nota=='A')
+        printf("1: Ótimo\t2: Bom\t3: Regular\t4: Ruim\t5: Péssimo\nSua opinião em relação ao filme, segundo as seguintes notas:");
+        scanf("%d",&nota);
+        if (nota==1)
         {
             if (qtdA==0)
             {
@@ -40,7 +39,7 @@ int main(){
             }
             qtdA++;
         }
-        if (nota=='D')
+        if (nota==4)
         {
             mediaIdRuim=mediaIdRuim+idade;
             if (qtdD==0)
@@ -53,7 +52,7 @@ int main(){
             }
             qtdD++;
         }
-        if (nota=='E')
+        if (nota==5)
         {
             if (qtdE==0)
             {
@@ -81,7 +80,7 @@ int main(){
     
     printf("\n%d\tQuantidade de pessoas que acharam OTIMO o Filme.",qtdA);
     printf("\n%.2f\tÉ a media de idade das pessoas que acharam RUIM o Filme.",mediaIdRuim);
-    printf("\n%.2f\tÉ O Percentual de pessoas que acharam PESSIMO o Filme.",percPess);
+    printf("\n%.2f%%\tÉ O Percentual de pessoas que acharam PESSIMO o Filme.",percPess);
     printf("\n%d\tÉ a maior idade da pessoa que achau PESSIMO o Filme.",maiorIdPess);
     printf("\n%d\tÉ a diferença de idade entre a maior idade que respondeu ótimo e a maior idade que respondeu RUIM o Filme.",diferAD);
 

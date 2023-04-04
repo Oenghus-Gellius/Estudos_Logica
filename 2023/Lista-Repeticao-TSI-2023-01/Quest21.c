@@ -5,6 +5,6 @@ consecutivos a partir de m inclusive.
 */
 #include <stdio.h>
 int main(){
-    int m,n
+    int m,n;
     return 0;
 }

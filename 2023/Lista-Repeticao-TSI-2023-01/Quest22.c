@@ -34,11 +34,8 @@ int main(){
                     {
                         fatorial=fatorial*i;
                     }
-                    
                 }
-                
             }
-            
         }
         
     } while (m>0);

@@ -10,9 +10,9 @@ capazes de olhar a diferença de consumo entre dois dias consecutivos e saber qu
 Porém em alguns dias eles simplesmente esqueceram de efetuar a leitura, e 
 assim, após um longo tempo, seu registro de consumo tornou-se incompleto. Eles têm 
 uma lista de datas e consumo, mas nem todas as datas são consecutivas em virtude dos 
-dias em que eles não efetuaram a leitura do hidrômetro. Eles desejam levar em conta 
-apenas os dias onde o consumo pode ser precisamente determinado, e precisam de sua 
-ajuda em uma ferramenta para auxiliá-los. 
+dias em que eles não efetuaram a leitura do hidrômetro. 
+Eles desejam levar em conta apenas os dias onde o consumo pode ser precisamente determinado, 
+e precisam de sua ajuda em uma ferramenta para auxiliá-los. 
 ------
 Tal ferramenta deverá ler um inteiro N indicando o número de medidas que foram realizadas. 
 Cada leitura é representada por 4 valores inteiros que representam 
@@ -44,7 +44,7 @@ int main()
     int diaEnt,mesEnt,anoEnt,diaAnterio,mesAnterio,anoAnterio;
     int diaDifrenca,mesDiferenca,anodiferenca;
     int totalDias=0;
-    int consumoAnterior,consumoAtual,consumoIntervalo,consumoTotal;
+    int consumoAnterior,consumoAtual,consumoIntervalo,consumoTotal=0;
     
     printf("\nInsira a quantidade de leituras realizadas.:");
     scanf("%d",&numMedicao);
@@ -69,6 +69,7 @@ int main()
             diaDifrenca=diaEnt;
             mesDiferenca=mesEnt;
             anodiferenca=anoEnt;
+            consumoTotal=-consumoAtual;
         }
         
         while (diaDifrenca!=diaEnt || mesDiferenca!=mesEnt || anodiferenca!=anoEnt)
@@ -133,13 +134,16 @@ int main()
                     }
                 }
         }
+        
         consumoIntervalo=consumoAtual-consumoAnterior;
-        consumoTotal=consumoAtual-consumoIntervalo;
+        consumoTotal=consumoTotal+consumoIntervalo;
+
         // Atualiza as variáveis para a próxima interação
         diaAnterio=diaEnt;
         mesAnterio=mesEnt;
         anoAnterio=anoEnt;
         consumoAnterior=consumoAtual;
+        consumoIntervalo=0;
     }
     if (numMedicao>0)
     {

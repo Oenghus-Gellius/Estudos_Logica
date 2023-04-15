@@ -118,7 +118,7 @@ int main(){
             printf("\n%d\tTotal de ocorrencia",totalOcorrencia);
             printf("\n%d\tTotal de ocorrencia do Chefe de Policia",chefe);
             printf("\n%d\tTotal de ocorrencia do Policial Pedro",pedro);  
-            printf("\n%d\tTotal de ocorrencia do Policial Maria",maria);            
+            printf("\n%d\tTotal de ocorrencia do Policial Maria\n",maria);            
         }
     } while (tipOcorrencia>0 && tipOcorrencia<5);
 

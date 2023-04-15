@@ -12,8 +12,8 @@ assim, após um longo tempo, seu registro de consumo tornou-se incompleto. Eles 
 uma lista de datas e consumo, mas nem todas as datas são consecutivas em virtude dos 
 dias em que eles não efetuaram a leitura do hidrômetro. Eles desejam levar em conta 
 apenas os dias onde o consumo pode ser precisamente determinado, e precisam de sua 
-ajuda em uma ferramenta para auxiliá-los. Tal ferramenta deverá ler um inteiro N 
-indicando o número de medidas que foram realizadas. Cada leitura é representada por 4 
+ajuda em uma ferramenta para auxiliá-los. 
+Tal ferramenta deverá ler um inteiro N indicando o número de medidas que foram realizadas. Cada leitura é representada por 4 
 valores inteiros que representam respectivamente: Dia, Mês, Ano e o consumo lido no 
 início de cada dia. Os valores referentes as leituras serão informados de forma crescente 
 pela data, e pode incluir anos bissextos. A sequência de consumo também é crescente, 
@@ -32,3 +32,9 @@ Exemplo de Entrada
 15  11 2008 790 
 16  12 2008 810 
 */
+#include<stdio.h>
+int main()
+{
+    
+    return 0;
+}

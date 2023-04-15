@@ -55,7 +55,7 @@ int main(){
         else//possivel bissexto
             if (mesDiferenca == 2)
             {
-                if (anodiferenca % 400==0 || (anodiferenca % 4==0 && anodiferenca != 0))
+                if (anodiferenca % 400==0 || (anodiferenca % 4==0 && anodiferenca % 100 != 0))
                 {
                     if (diaDifrenca==29)
                     {

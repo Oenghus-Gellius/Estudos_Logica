@@ -44,14 +44,15 @@ int main()
     int diaEnt,mesEnt,anoEnt,diaAnterio,mesAnterio,anoAnterio;
     int diaDifrenca,mesDiferenca,anodiferenca;
     int totalDias=0;
-    int consumoAnterior,consumoAtual,consumoIntervalo,consumoTotal=0;
+    int diasCorridos=0,totalDiasCorridos=0;
+    int consumoAnterior,consumoAtual,consumoIntervalo=0,consumoTotal=0;
     
     printf("\nInsira a quantidade de leituras realizadas.:");
     scanf("%d",&numMedicao);
 
     for (count = 0; count < numMedicao; count++)
     {
-        printf("Insira a data de leitura!");
+        printf("\nInsira a data de leitura!");
         printf("\nDia.:");
         scanf("%d",&diaEnt);
         printf("\nMes.:");
@@ -69,12 +70,13 @@ int main()
             diaDifrenca=diaEnt;
             mesDiferenca=mesEnt;
             anodiferenca=anoEnt;
-            consumoTotal=-consumoAtual;
+            consumoAnterior=consumoAtual;
         }
         
         while (diaDifrenca!=diaEnt || mesDiferenca!=mesEnt || anodiferenca!=anoEnt)
         {
             totalDias++;
+            diasCorridos++;
             if (mesDiferenca == 1 || mesDiferenca == 3 || mesDiferenca == 5 || mesDiferenca == 7 || mesDiferenca == 8 ||mesDiferenca == 10 || mesDiferenca == 12)
             {
                 if (diaDifrenca == 31)
@@ -134,9 +136,12 @@ int main()
                     }
                 }
         }
-        
-        consumoIntervalo=consumoAtual-consumoAnterior;
-        consumoTotal=consumoTotal+consumoIntervalo;
+        if (diasCorridos==1)
+        {
+            totalDiasCorridos=totalDiasCorridos+diasCorridos;
+            consumoIntervalo=consumoAtual-consumoAnterior;
+            consumoTotal=consumoTotal+consumoIntervalo;
+        }
 
         // Atualiza as variáveis para a próxima interação
         diaAnterio=diaEnt;
@@ -144,10 +149,11 @@ int main()
         anoAnterio=anoEnt;
         consumoAnterior=consumoAtual;
         consumoIntervalo=0;
+        diasCorridos=0;
     }
     if (numMedicao>0)
     {
-        printf("\n%d Total de dias aferidos e %d litros consumidos",totalDias,consumoTotal);
+        printf("\n%d Total de dias aferidos e %d litros consumidos",totalDiasCorridos,consumoTotal);
     }
     else
     {

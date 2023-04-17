@@ -4,6 +4,6 @@
 */
 #include<stdio.h>
 int main(){
-    int 
+    int soma,denominador;
     return 0;
 }

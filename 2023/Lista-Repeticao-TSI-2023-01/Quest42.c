@@ -8,7 +8,7 @@ cos( X ) = 1 - X^2/2! + X^4/4! - X^6/6! + X^8/8! ….
 
 int main(){
     int x,i,sinal,count;
-    double cos=1,numerador=1,denominador=1,expoente=0;
+    double cos=1,numerador=1,denominador=1,doisEmDois=0;
     const int QTD = 15;
 
     printf("Informe o valor de 'x'.:");
@@ -19,16 +19,16 @@ int main(){
 
     for (i = 0; i < QTD; i++)
     {
-        numerador=sinal*pow(x,expoente);
+        numerador=sinal*pow(x,doisEmDois);
 
         for (count = 1; count <= i; count++)
         {
-            denominador=denominador*count;
+            denominador=denominador*doisEmDois;
         }
         cos=cos+(numerador/denominador);
 
         sinal=sinal*-1;
-        expoente=expoente+2;
+        doisEmDois=doisEmDois+2;
 
     }
     printf("\no cos(%d) = %2lf",x,cos);

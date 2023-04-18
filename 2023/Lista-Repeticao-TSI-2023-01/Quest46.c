@@ -4,6 +4,18 @@
 */
 #include<stdio.h>
 int main(){
-    int soma,denominador;
+    int n,i,sinal=1;
+    float soma,denominador;
+
+    printf("Insira o valor de 'N' da serie.:");
+    scanf("%d",&n);
+
+    for (i = 0; i < n; i++)
+    {
+        soma=soma+(float)1+i/n*sinal*i;
+        sinal=sinal*-1;
+    }
+    printf("\nA soma da serie.: %f",soma);
+    
     return 0;
 }

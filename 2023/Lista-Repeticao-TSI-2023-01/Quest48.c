@@ -8,8 +8,8 @@ E = 1 + 1 / 1! + 1 / 2! + 1 / 3! + 1 / N!
 #include <stdio.h>
 
 int main(){
-    int n,i,j,fat=1;
-    float soma=0;
+    int n,i,j;
+    float soma=0,fat=1;
 
     printf("Insira o valor de 'n'.:");
     scanf("%d",&n);

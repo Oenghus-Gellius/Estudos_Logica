@@ -92,6 +92,7 @@ int main(){
             case 4://heroina
                 hero++;
                 chefe++;
+                alto++;
                 break;
             default:
                 break;
@@ -99,21 +100,24 @@ int main(){
             
             totalOcorrencia++;
 
-            if (chefe<=pedro && chefe<=maria)
+            if (nivOcorrencia != 4)
             {
-                chefe++;
-            }
-            else
-                if (pedro<=maria && pedro<=chefe)
+                if (chefe<=pedro && chefe<=maria)
                 {
-                    pedro++;
+                    chefe++;
                 }
                 else
-                    if (maria<=chefe && maria<=pedro)
+                    if (pedro<=maria && pedro<=chefe)
                     {
-                        maria++;
+                        pedro++;
                     }
-                      
+                    else
+                        if (maria<=chefe && maria<=pedro)
+                        {
+                            maria++;
+                        }
+            }
+                  
             printf("\n---Relatorio---");
             printf("\n%d\tTotal de ocorrencia",totalOcorrencia);
             printf("\n%d\tTotal de ocorrencia do Chefe de Policia",chefe);

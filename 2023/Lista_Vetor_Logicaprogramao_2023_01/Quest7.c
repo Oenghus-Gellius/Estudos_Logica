@@ -12,71 +12,86 @@ Escreva o vetor Z a cada cálculo.
 #include <stdlib.h>
 #include <time.h>
 
-#define TAMVET 10
+#define TAMVET 5
 
 int main(){
-    int vetX[TAMVET],vetY[TAMVET],vetZ[TAMVET];
-    int i,j,k=0;
+    int vetX[TAMVET]={1,2,3,4,5},vetY[TAMVET]={4,5,6,7,8},vetZ[TAMVET*2];
+    int i,j,k=0,posZ=0,achou;
 
-    for (i = 0; i < TAMVET; i++)
+    /*for (i = 0; i < TAMVET; i++)
     {
         vetX[i]=rand()%20+1;
         vetY[i]=rand()%20+1;
     }
-
-    printf("\nVetor X\t");
+    */
+    printf("\nVetor X\t\t");
     for (i = 0; i < TAMVET; i++)
     {
         printf("%d\t",vetX[i]);
     }
-    printf("\nVetor Y\t");
+    printf("\nVetor Y\t\t");
     for (i = 0; i < TAMVET; i++)
     {
         printf("%d\t",vetY[i]);
     }
+    //QuestA
+    printf("\nUnião.:\t\t");
+    for (i = 0; i < TAMVET; i++)
+    {
+        vetZ[i]=vetX[i];
+    }
 
-    for (i = 0; i < TAMVET; i++)//Quest A
-    {
-        for (j = 0; j < TAMVET; j++)
-        {
-            if (vetX[i]==vetY[j])
-            {
-                vetZ[k]=vetX[i];  
-                k++;   
-            }
+    posZ=TAMVET-1;//Ãºltima posiÃ§Ã£o preenchida do vetorZ
+    for(k=0;k<TAMVET;k++){
+        //verificando se o elemento da posiÃ§Ã£o k de vetorY
+        //estÃ¡ presente em vetorX
+        i=0;//usada para percorrer o vetor vetorX
+        achou=0;//usada para indicar o status da busca
+        while(i<TAMVET && achou==0){
+            if(vetX[i]==vetY[k])
+               achou=1;
+            else
+               i++;
+        }
+        if(achou==0){
+            posZ++;
+            vetZ[posZ]=vetY[k];
         }
     }
-    printf("\nA união de X e Y.:\t");//Quest A
-    for (i = 0; i < k; i++)
+    printf("\nVetorZ\t\t");
+    for (i = 0; i <= posZ; i++)
     {
         printf("%d\t",vetZ[i]);
     }
+    printf("\nposZ %d",posZ);
+
+        for(i=0;i<TAMVET;i++)
+       vetZ[i]=vetX[i];
     
-    printf("\nA diferença entre X e Y.:\t");//Quest B
-    for (i = 0; i < TAMVET; i++)
-    {
-        vetZ[i]=vetX[i]-vetY[i];
-        printf("%d\t",vetZ[i]);
-    }
-    printf("\nA soma entre X e Y.:\t");//Quest C
-    for (i = 0; i < TAMVET; i++)
-    {
-        vetZ[i]=vetX[i]+vetY[i];
-        printf("%d\t",vetZ[i]);
-    }
-    printf("\nO produto entre X e Y.:\t");//Quest D
-    for (i = 0; i < TAMVET; i++)
-    {
-        vetZ[i]=vetX[i]*vetY[i];
-        printf("%d\t",vetZ[i]);
-    }
-    for (i = 0; i < TAMVET; i++)
-    {
-        if (vetX)
-        {
-            /* code */
+    printf("\nIntercessao");
+    posZ=TAMVET-1;//Ãºltima posiÃ§Ã£o preenchida do vetorZ
+    for(k=0;k<TAMVET;k++){
+        //verificando se o elemento da posiÃ§Ã£o k de vetorY
+        //estÃ¡ presente em vetorX
+        i=0;//usada para percorrer o vetor vetorX
+        achou=0;//usada para indicar o status da busca
+        while(i<TAMVET && achou==0){
+            if(vetX[i]==vetY[k])
+               achou=1;
+            else
+               i++;
+        }
+        if(achou==1){
+            posZ++;
+            vetZ[posZ]=vetY[k];
         }
     }
+        printf("\nVetorZ\t\t");
+    for (i = 0; i <= posZ; i++)
+    {
+        printf("%d\t",vetZ[i]);
+    }
+    printf("\nposZ %d",posZ);
     
     return 0;
 }

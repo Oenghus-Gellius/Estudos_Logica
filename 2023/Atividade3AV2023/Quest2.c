@@ -8,8 +8,8 @@ nota for maior ou igual a 12; e mostre uma mensagem de REPROVADO, caso contrári
 */
 #include <stdio.h>
 #include <string.h>
-#define QUESTS 20
-#define QTDALUNOS 50
+#define QUESTS 10
+#define QTDALUNOS 5
 
 int main(){
     int vetGab[QUESTS],vetRes[QUESTS],vetMat[QTDALUNOS],vetAcertos[QTDALUNOS];
@@ -93,29 +93,21 @@ int main(){
 
             posMat++;
         }
-        
-        printf("\nposmat= %d",posMat);
-        printf("\ni= %d",i);
-        printf("\nj= %d",j);
     }
+
     printf("\nNumeros de matricula.:");
     for (i = 0; i < posMat; i++)
     {
-        printf("\n%d\t%s\t\tacerto.:%d",vetMat[i],vetNome[i],vetAcertos[i]);
-        if (vetAcertos[i]>=QUESTS*0.6);
+        printf("\n%d\t%s\t\t\tacerto.:%d",vetMat[i],vetNome[i],vetAcertos[i]);
+        if (vetAcertos[i]>=QUESTS*0.6)
         {
             printf("\tAPROVADO!!!");
         }
-        if (vetAcertos[i]<QUESTS*0.6)
+        else
         {
-            printf("\tREPROVADO");
+            printf("\tREPROVADO!!!");
         }
     }
     
-
-
-
-    
-
     return 0;
 }

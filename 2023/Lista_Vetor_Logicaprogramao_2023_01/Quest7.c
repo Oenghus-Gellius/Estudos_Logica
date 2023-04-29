@@ -1,5 +1,5 @@
 /*
-7) Faça um programa que tenha como entrada 2 vetores X(10) e Y(10). Criar, a seguir, um
+7) Faça um programa em linguagem c que tenha como entrada 2 vetores X(10) e Y(10). Criar, a seguir, um
 vetor Z que seja
 a) a união de X com Y;
 b) a diferença entre X e Y;
@@ -16,14 +16,8 @@ Escreva o vetor Z a cada cálculo.
 
 int main(){
     int vetX[TAMVET]={1,2,3,4,5},vetY[TAMVET]={4,5,6,7,8},vetZ[TAMVET*2];
-    int i,j,k=0,posZ=0,achou;
+    int i,k,j,posZ,achei,intersected;
 
-    /*for (i = 0; i < TAMVET; i++)
-    {
-        vetX[i]=rand()%20+1;
-        vetY[i]=rand()%20+1;
-    }
-    */
     printf("\nVetor X\t\t");
     for (i = 0; i < TAMVET; i++)
     {
@@ -34,64 +28,100 @@ int main(){
     {
         printf("%d\t",vetY[i]);
     }
-    //QuestA
-    printf("\nUnião.:\t\t");
+    //União
+    posZ=0;
     for (i = 0; i < TAMVET; i++)
     {
         vetZ[i]=vetX[i];
+        posZ++;
     }
-
-    posZ=TAMVET-1;//Ãºltima posiÃ§Ã£o preenchida do vetorZ
-    for(k=0;k<TAMVET;k++){
-        //verificando se o elemento da posiÃ§Ã£o k de vetorY
-        //estÃ¡ presente em vetorX
-        i=0;//usada para percorrer o vetor vetorX
-        achou=0;//usada para indicar o status da busca
-        while(i<TAMVET && achou==0){
-            if(vetX[i]==vetY[k])
-               achou=1;
-            else
-               i++;
-        }
-        if(achou==0){
-            posZ++;
-            vetZ[posZ]=vetY[k];
-        }
-    }
-    printf("\nVetorZ\t\t");
-    for (i = 0; i <= posZ; i++)
+    for (k = 0; k < TAMVET; k++)
     {
-        printf("%d\t",vetZ[i]);
+        i=0;
+        achei=0;
+        while (i < posZ && achei==0)
+        {
+            if (vetX[i]==vetY[k])
+            {
+                achei=1;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        if (achei==0)
+        {
+            vetZ[posZ]=vetY[k];
+            posZ++;
+        }
     }
-    printf("\nposZ %d",posZ);
-
-        for(i=0;i<TAMVET;i++)
-       vetZ[i]=vetX[i];
+    //saida união
+    printf("\nUnião.:");
+    for (i = 0; i < posZ; i++)
+    {
+        printf("\t%d",vetZ[i]);
+    }
     
-    printf("\nIntercessao");
-    posZ=TAMVET-1;//Ãºltima posiÃ§Ã£o preenchida do vetorZ
-    for(k=0;k<TAMVET;k++){
-        //verificando se o elemento da posiÃ§Ã£o k de vetorY
-        //estÃ¡ presente em vetorX
-        i=0;//usada para percorrer o vetor vetorX
-        achou=0;//usada para indicar o status da busca
-        while(i<TAMVET && achou==0){
-            if(vetX[i]==vetY[k])
-               achou=1;
-            else
-               i++;
-        }
-        if(achou==1){
-            posZ++;
-            vetZ[posZ]=vetY[k];
-        }
-    }
-        printf("\nVetorZ\t\t");
-    for (i = 0; i <= posZ; i++)
+    //Diferença
+    k=0;
+    for (i = 0; i < TAMVET; i++)
     {
-        printf("%d\t",vetZ[i]);
+        j=0;
+        intersected=0;
+        while (j < TAMVET && intersected==0)
+        {
+            if (vetX[i]==vetY[j])
+            {
+                intersected=1;
+            }
+            j++;
+        }
+        if (intersected==0)
+        {
+            vetZ[k]=vetX[i];
+            k++;
+        }        
     }
-    printf("\nposZ %d",posZ);
+        
+
+    //Saida diferença
+    printf("\nDiferença.:");
+    for (i = 0; i < k; i++)
+    {
+        printf("\t%d",vetZ[i]);
+    }
+
+    //intercessão
+    k=0;
+    for (i = 0; i < TAMVET; i++)
+    {
+        j=0;
+        intersected=0;
+        while (j < TAMVET && intersected==0)
+        {
+            if (vetX[i]==vetY[j])
+            {
+                intersected=1;
+            }
+            j++;
+        }
+        if (intersected==1)
+        {
+            vetZ[k]=vetX[i];
+            k++;
+        }
+    }
+    //Saida intercessão
+    printf("\nintercessão.:");
+    for (i = 0; i < k; i++)
+    {
+        printf("\t%d",vetZ[i]);
+    }
+
+    printf("\nPosZ=%d",posZ);
+    printf("\ni=%d",i);
+    printf("\nk=%d",k);
     
     return 0;
 }

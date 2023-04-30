@@ -1,43 +1,47 @@
 #include <stdio.h>
 #include <string.h>
-
-int main() {
-  int X[5]={1,2,3,4,5}, Y[5]={4,5,6,7,8}, Z[5];
-  int i, j, k, found;
-
-  // inicializa o vetor Z com 0
-  memset(Z, 0, sizeof(Z));
-
-  // cria o vetor Z, que será a diferença entre X e Y
-  k = 0;
-  for (i = 0; i < 5; i++) {
-    found = 0;
-    j = 0;
-    while (j < 5 && !found) {
-      if (X[i] == Y[j]) {
-        found = 1;
-      }
-      j++;
+#define NA 3//nÃºmero de alunos
+int main(){
+    int vIdades[NA],i,k,achou;
+    float vNotas[NA],media=0;
+    char vNomes[NA][100];
+    
+    for(i=0;i<NA;i++){
+        printf("\nDados do %do. aluno\n",i+1);
+        //validando o nome
+        do{
+           printf("Nome:");
+           fgets(vNomes[i],100,stdin);
+           setbuf(stdin,NULL);
+           k=0;
+           achou=0;
+           while(k<i && achou==0){
+               if(strcmp(vNomes[k],vNomes[i])==0)
+                  achou=1;
+               else
+                  k++;
+           }
+           
+           if(achou==1)
+              printf("\nNome jÃ¡ cadastrado!!!\n");
+        }while(achou==1);
+        
+        printf("Nota:");
+        scanf("%f",&vNotas[i]);
+        printf("Idade:");
+        scanf("%d",&vIdades[i]);
+        setbuf(stdin,NULL);
+        media+=vNotas[i];
     }
-    j = 0;
-    while (j < 5 && found) {
-      if (Y[j] == X[i]) {
-        found = 0;
-      }
-      j++;
+    media=media/NA;//media/=NA;
+    printf("\nMÃ©dia da Turma = %.1f",media);
+    printf("\nAlunos com nota superior a mÃ©dia da turma\n");
+    for(i=0;i<NA;i++){
+        if(vNotas[i]>media){
+            printf("Nome: %s",vNomes[i]);
+            printf("Nota: %.1f",vNotas[i]);
+            printf("\nIddade: %d\n\n",vIdades[i]);
+        }
     }
-    if (found) {
-      Z[k] = X[i];
-      k++;
-    }
-  }
-
-  // exibe os valores do vetor Z
-  printf("Diferenca entre X e Y:\n");
-  for (i = 0; i < k; i++) {
-    printf("%d ", Z[i]);
-  }
-  printf("\n");
-
-  return 0;
+    return 0;
 }

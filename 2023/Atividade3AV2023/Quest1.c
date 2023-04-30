@@ -33,22 +33,89 @@ Pedro
 #define NUMPLAYERS 20
 
 int main(){
-    int vetPontos[NUMPLAYERS];
-    int semanas,i,j,posCadastro,achei;
-    char Nome[100];
+    int vetPontos[NUMPLAYERS]={0};
+    int semanas,i,s,j,k,p,posCadastro,achei;
     char vetNomeBase[NUMPLAYERS][100],vetNomeSemana[LISTASEMANAL][100];
 
-    printf("\nInsira o numero de semanas.:");
-    scanf("%d",&semanas);
+    do
+    {
+        printf("\nInsira o numero de semanas.:");
+        scanf("%d",&semanas);
+        setbuf(stdin,NULL);
+        if (semanas<=0)
+        {
+            printf("\nValor incorreto de semadas!!!");
+        }
+        
+    } while (semanas<=0);
 
     posCadastro=0;
-    printf("\nLista Semanal.:");
+    for (s = 0; s < semanas; s++)//variavem s é o numero de semanas 
+    {
+        printf("\nOs melhores da %dª Semana.:",s+1);
+        for (i = 0; i < LISTASEMANAL; i++)//A variavel i é a colocação dos atletas na semana
+        {
+            do
+            {
+                printf("\nNome %dº Colocado.:",i+1);
+                fgets(vetNomeSemana[i],100,stdin);
+                setbuf(stdin,NULL);
+                k=0;//variavel k é para o check se repete os atletas 
+                achei=0;
+                while (k < i && achei==0)//procurar alista de jogadores
+                {
+                    if (strcmp(vetNomeSemana[k],vetNomeSemana[i])==0)
+                    {
+                        achei=1;
+                    }
+                    else
+                    {
+                        k++;
+                        vetPontos[i]=10-i;                       
+                    }
+                }
+                if (achei==1)
+                {
+                    printf("\nNome repetido!!!");
+                }
+            } while (achei==1);
+            
+        }
+        printf("\nClassificação da semana.:");
+        for (i = 0; i < LISTASEMANAL; i++)
+        {
+            printf("\n%d\t\t%s",vetPontos[i],vetNomeSemana[i]);
+        }
+        for (i = 0; i < posCadastro; i++)
+        {
+            for (j = 0; j < posCadastro; i++)
+            {
+                //Verifica se o jogador já está cadastrado na base
+                if (strcmp(vetNomeBase[i],vetNomeSemana[j])==0)
+                {
+                    achei==1;
+                }
+                else
+                {
+                    vetNomeBase[posCadastro]=vetNomeSemana[j];
+                    vetPontos[posCadastro]=vetPontos[j];
+                    posCadastro++;
+                }
+                
+                
 
+            }
+            
+        }
+    }
+    printf("\nClassificação final:");
+    for (i = 0; i < posCadastro; i++)
+    {
+        printf("\n%d\t%dº\t\t%c",i+1,vetPontos[i],vetNomeBase[i]);
+    }
     
 
     
-
-
 
     return 0;
 }

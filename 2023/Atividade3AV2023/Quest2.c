@@ -38,6 +38,7 @@ int main(){
         {
             printf("\n%d Cadasdro - Insira o numero de Matricula.: ",i+1);
             scanf("%d",&mat);
+            setbuf(stdin,NULL);
             if (mat<=0)
             {
                 printf("\nNumero de Matricula errada!!!");
@@ -66,9 +67,9 @@ int main(){
             vetMat[posMat]=mat;
 
             printf("\nNome.:");//nome aluno
-            //fgets(vetNome[posMat],100,stdin);//<==== Não está registrando 
-            //setbuf(stdin,NULL);
-            scanf("%s",&vetNome[posMat]);
+            fgets(vetNome[posMat],100,stdin);//<==== Não está registrando?! 
+            setbuf(stdin,NULL);
+            //scanf("%s",&vetNome[posMat]);
 
             //Respostas
             acerto=0;

@@ -7,6 +7,28 @@ cada cliente tem direito.
 */
 #include <stdio.h>
 #define LOCACOES 50
+#define PROMO 5
+    int main(){
+        int vetLocacoes[LOCACOES],vetPormo[PROMO];
+        int i,k,ultimaPos;
 
+        k=0;
+        do
+        {
+            printf("\nInsira o numero de locações.:");
+            scanf("%d",&vetLocacoes[k]);
+            while (vetLocacoes[k] <= 0)
+            {
+                printf("\nNumero de Locações invalidas.:");
+                printf("\nInsira o numero valido de locações.:");
+                scanf("%d",&vetLocacoes[k]);
+            }
+            k++;
+
+        } while (k < LOCACOES);
+        
+
+        return 0;
+    }
 
 

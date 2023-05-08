@@ -36,7 +36,7 @@ int main(){
     }
     for ( i = 0; i < QTD; i++)
     {
-        vet3[posVet3]=vet2[k];
+        vet3[posVet3]=vet2[i];
         posVet3++;        
     }
     printf("\nVet 3 Des.:");

@@ -44,6 +44,7 @@ int main(){
     {
         printf("\t%d",vet3[i]);
     }
+    
     //ordenando select short
     for (i = 0; i < posVet3-1; i++)
     {

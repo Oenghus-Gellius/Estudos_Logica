@@ -49,67 +49,89 @@ informe os valores da segunda coluna da matriz de quantidades.
 #define VALORES 2
 #define CEDULAS 6
 
-void funcSaque(int caixaCedulas[][CEDULAS]){
-    int saque,vetDiv[CEDULAS],resto;
-    int i;
-    do
-    {
-        printf("\nInsira o valor do saque.:");
-        scanf("%f",&saque);
-        if (saque<=0)
-        {
-            printf("Valor incorreto.");
-        }
-        else
-            if (saque>funcValorTotal(caixaCedulas[VALORES][CEDULAS]))
-            {
-                printf("\nValor insuficiente no Caixa para saque!!");
-            }
-            else
-            {
-                resto=saque;
-                for (i = 0; i < CEDULAS; i++)
-                {
-                    vetDiv[i]=resto/caixaCedulas[0][i];
-                    resto=resto%caixaCedulas[0][i];
-                }
-                printf("\n-----------\nSaque.:%d",saque);
-                for (i = 0; i < CEDULAS; i++)
-                {
-                    printf("\n%d Cedulas de.: %d",vetDiv[i],caixaCedulas[0][i]);
-                }
-            }
-    } while (saque<=0);
-}
-void funcRelatorio (int caixaCedulas[][CEDULAS]){
+void funcRelatorio (int caixaCedulas[][VALORES]){
     int i;
     for (i = 0; i < CEDULAS; i++)
     {
-        printf("\n%d cedulas de %d",caixaCedulas[0][i],caixaCedulas[1][i]);
+        printf("\n%d cedulas de %d",caixaCedulas[i][0],caixaCedulas[i][1]);
     }
 }
-int funcValorTotal (int caixaCedulas[][CEDULAS]){
+int funcValorTotal (int caixaCedulas[][VALORES]){
     int valorTotal,i;
     valorTotal=0;
     for (i = 0; i < CEDULAS; i++)
     {
-        valorTotal=valorTotal+(caixaCedulas[0][i]*caixaCedulas[1][i]);
+        valorTotal=valorTotal+(caixaCedulas[i][0]*caixaCedulas[i][1]);
     }
     return valorTotal;  
 }
-void funcReposicaoCedulas (int caixaCedulas[][CEDULAS]){
+void funcReposicaoCedulas (int caixaCedulas[][VALORES]){
     int i,notasDin;
     printf("\nInsira as cedulas.:");
-    for (size_t i = 0; i < CEDULAS; i++)
+    for (i = 0; i < CEDULAS; i++)
     {
-        printf("\nCedulas de %d.:",caixaCedulas[0][i]);
+        printf("\nCedulas de %d.:",caixaCedulas[i][0]);
         scanf("%d",&notasDin);
-        caixaCedulas[1][i]=caixaCedulas[1][i]+notasDin;
+        caixaCedulas[i][1]=caixaCedulas[i][1]+notasDin;
     }
+}
+void funcSaque(int caixaCedulas[][VALORES]){
+    int saque,vetDiv[CEDULAS],resto;
+    int i,qtdCedulas,tempSaque;
+    do
+    {
+        printf("\nInsira o valor do saque.:");
+        scanf("%d",&saque);
+        if (saque<=0)
+        {
+            printf("Valor incorreto.");
+        }
+        else if (saque>funcValorTotal(caixaCedulas))
+        {
+            printf("\nValor insuficiente no Caixa para saque!!");
+        }
+        else
+        {
+            resto=saque;
+            qtdCedulas=0;
+            tempSaque=0;
+            for (i = 0; i < CEDULAS; i++)
+            {
+                vetDiv[i]=resto/caixaCedulas[i][0];
+                if (vetDiv[i]>caixaCedulas[i][1])
+                {
+                    vetDiv[i]=caixaCedulas[i][1];
+                }                    
+                resto=resto-(vetDiv[i]*caixaCedulas[i][0]);
+                qtdCedulas=qtdCedulas+vetDiv[i];
+                tempSaque=tempSaque+vetDiv[i]*caixaCedulas[i][0];
+            }
+            if (tempSaque!=saque)
+            {
+                printf("Quantidade de Cedulas insuficiente!!");
+                break;
+            }
+            if (qtdCedulas>30)
+            {
+                    printf("\nSaque ultrapassou o limeite de Cedulas");
+                    break;
+            }                
+            for (i = 0; i < CEDULAS; i++)
+            {
+                caixaCedulas[i][1]=caixaCedulas[i][1]-vetDiv[i];
+            }
+            printf("\n-----------\nSaque.:%d",saque);
+            for (i = 0; i < CEDULAS; i++)
+            {
+                printf("\n%d Cedulas de.: %d",vetDiv[i],caixaCedulas[i][0]);
+            }
+            printf("\nSaque efetuado com sucesso!!!");
+        }
+    } while (saque<=0);
 }
 
 int main(){
-    int caixaCedulas[VALORES][CEDULAS]={100,50,20,10,2,1,8,8,8,8,8,8};
+    int caixaCedulas[CEDULAS][VALORES]={100,8,50,8,20,8,10,8,2,8,1,8};
     int i,k,menu,cedulas;
     float saque;
     

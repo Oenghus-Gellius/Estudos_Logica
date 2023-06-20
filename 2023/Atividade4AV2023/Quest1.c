@@ -1,4 +1,7 @@
 /*
+Bolivar A. D. Junior
+15/06-2023
+
 Questão 01) Faça um programa para simular o controle de emissão de cédulas de um caixa
 eletrônico. O seguinte menu deve ser apresentado:
  Terminal de Autoatendimento (Módulo Administrador)

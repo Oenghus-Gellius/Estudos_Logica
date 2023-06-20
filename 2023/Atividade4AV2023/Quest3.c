@@ -1,4 +1,7 @@
 /*
+Bolivar A. D. Junior
+15/06-2023
+
 Os elementos aijde uma matriz inteira Anxn representam os custos de transporte da
 cidade i para a cidade j. Dados n itinerários, cada um com k cidades, 
 calcular o custo total para cada itinerário.

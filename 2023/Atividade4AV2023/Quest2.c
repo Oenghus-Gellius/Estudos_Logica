@@ -1,4 +1,8 @@
-/*Questão 02) Faça um programa que receba:
+/*
+Bolivar A. D. Junior
+15/06-2023
+
+Questão 02) Faça um programa que receba:
 a) 10 nomes de produtos e armazene-os em um vetor (o nome é único);
 b) o nome de cada uma das cinco lojas (nome é único)
 c) o estoque de cada um destes produtos, em cada um das cinco lojas e armazene-os em 

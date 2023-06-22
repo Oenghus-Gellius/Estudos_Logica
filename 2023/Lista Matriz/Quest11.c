@@ -1,4 +1,4 @@
-/*11) Faça um programa que receba:
+/*11) Faça um programa em C que receba:
 a) 10 nomes de produtos e armazene-os em um vetor (o nome é único);
 b) O estoque de cada um destes produtos, em cada um dos 5 armazéns e armazene-os em uma
 matriz 5X10;
@@ -13,8 +13,9 @@ deste produto;
 
 #include <stdio.h>
 #include <string.h>
-#define PRODUTOS 3
 #define ARMAZEM 2
+#define PRODUTOS 3
+
 
 //check se repete
 char funcCheckRepete (char nomeCheck[],char vetNome[][100], int tamanho){
@@ -32,10 +33,10 @@ char funcCheckRepete (char nomeCheck[],char vetNome[][100], int tamanho){
 int main(){
     char vetNome[PRODUTOS][100]={"Veja","Escova","Camisinha"};
     char nomeProd[100];
-    int mEstoque[ARMAZEM][PRODUTOS]={{5,1,2},{6,2,2}};
-    float vetValorProd[PRODUTOS];
+    int mEstoque[ARMAZEM][PRODUTOS]={{5,1,4},{6,2,3}};
+    float vetValorProd[PRODUTOS]={5,7,6},vetTotalPorArmazem[ARMAZEM];
     int i,k;
-    int sair,codProduto,codArmazem,qtdPruduto,valorProd;
+    int sair,codProduto,codArmazem,qtdPruduto,valorProd,maiorQtdProduto,baseMaiorProdProd,baseMaiorProdArm;
     int vetTotalArmazem[ARMAZEM],vetTotalProduto[PRODUTOS];
 
 /*
@@ -104,22 +105,44 @@ int main(){
     for (i = 0; i < ARMAZEM; i++)//total em cada Armezm
     {
         vetTotalArmazem[i]=0;
+        vetTotalPorArmazem[i]=0;
         for (k = 0; k < PRODUTOS; k++)
         {
-            vetTotalArmazem[i]=vetTotalArmazem[i]+mEstoque[i][k];
+            vetTotalArmazem[i]=vetTotalArmazem[i]+mEstoque[i][k];//<--AQUI
+            vetTotalPorArmazem[i]=vetTotalPorArmazem[i]+(vetValorProd[i]*mEstoque[i][k]);
             
         }
         printf("\nO total de prudutos no armazem %d é.: %d",i,vetTotalArmazem[i]);
+        printf("\nO valor em estoque do armazem %d é %.2f",i,vetTotalPorArmazem[i]);
     }
 
-    for (i = 0; i < PRODUTOS; i++)//produto no total do armazem <===Problema AQUi!!!
+    for (i = 0; i < PRODUTOS; i++)//produto no total do armazem 
     {
         vetTotalProduto[i]=0;
         for (k = 0; k < ARMAZEM; k++)
         {
-            vetTotalProduto[k]=vetTotalArmazem+mEstoque[k][i];
+            vetTotalProduto[i]=vetTotalProduto[i]+mEstoque[k][i];//<--AQUI
         }
-        printf("\nO total de %s é.: %d",vetNome[i],vetTotalProduto[k]);
+        printf("\nO total de %s é.: %d",vetNome[i],vetTotalProduto[i]);
     }
+    //O nome do produto e o número do armazém que possui a maior quantidade de itens 
+    //estocados deste produto;
+    
+    for (i = 0; i < PRODUTOS; i++)
+    {
+        maiorQtdProduto=mEstoque[0][i];
+        baseMaiorProdProd=i;
+        baseMaiorProdArm=0;
+        for (k = 0; k < ARMAZEM; k++)
+        {
+            if (maiorQtdProduto<mEstoque[i][k])
+            {
+                baseMaiorProdProd=i;
+                baseMaiorProdArm=k;
+            }
+        }
+        printf("\nO produto %s tem %d no Armazem %d",vetNome[i],mEstoque[baseMaiorProdProd][baseMaiorProdArm],baseMaiorProdArm);
+    }
+    
     return 0;
 }

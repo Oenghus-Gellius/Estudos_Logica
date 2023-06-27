@@ -85,6 +85,7 @@ void funcPesquisaNome (Tfuncionario structFunc[],int ultimaPosCad){
 
 void funcCadastro (Tfuncionario structFunc[], int tamanho,int *ultimaPosCad){
     int mat,sair;
+    float sal;
 
     if (*ultimaPosCad<tamanho-1)
     {
@@ -100,8 +101,15 @@ void funcCadastro (Tfuncionario structFunc[], int tamanho,int *ultimaPosCad){
                 printf("\nNome.:");
                 fgets(structFunc[*ultimaPosCad].nome,100,stdin);
                 setbuf(stdin,NULL);
-                printf("\nSalario.:");
-                scanf("%f",&structFunc[*ultimaPosCad].salario);
+                do
+                {
+                    printf("\nSalario.:");
+                    scanf("%f",&structFunc[*ultimaPosCad].salario);  
+                    if (structFunc[*ultimaPosCad].salario < 0)
+                    {
+                        printf("\nValor incorreto!!!");
+                    }
+                } while (structFunc[*ultimaPosCad].salario < 0);
             }
             else
             {
@@ -109,8 +117,7 @@ void funcCadastro (Tfuncionario structFunc[], int tamanho,int *ultimaPosCad){
             }
             printf("\nPara cadastro digite-1 para sair digite-2.:");
             scanf("%d",&sair);
-        } while (sair!=2);
-        
+        } while (sair!=2); 
     }
     else
     {
@@ -118,7 +125,7 @@ void funcCadastro (Tfuncionario structFunc[], int tamanho,int *ultimaPosCad){
     }
 }
 
-void funcConsulta (Tfuncionario structFunc[], int ultimaPosCad){
+void funcConsultaMat (Tfuncionario structFunc[], int ultimaPosCad){
     int i,sair,mat,posicao;
     if (ultimaPosCad>=0)
     {
@@ -149,13 +156,98 @@ void funcConsulta (Tfuncionario structFunc[], int ultimaPosCad){
 }
 
 void funcListagem (Tfuncionario structFunc[], int ultimaPosCad){
+    int i;
+    if (ultimaPosCad>=0)
+    {
+        for (i = 0; i <= ultimaPosCad; i++)
+        {
+            printf("\n---------");
+            printf("\nMatricula.: %d",structFunc[i].matricula);
+            printf("\nNome.:%s",structFunc[i].nome);
+            printf("\nSalario.:%.2f",structFunc[i].salario);
+            printf("\n---------");
+        }  
+    }
+}
+
+void funcAlteracao (Tfuncionario structFunc[], int ultimaPosCad){
+    int i,sair,mat,alt,posicao;
+    if (ultimaPosCad>=0)
+    {
+        do
+        {
+            printf("\nInsira a Matricula do funcionario a ser alterado.:");
+            scanf("%d",&mat);
+            posicao=funcCheckMatricula(structFunc,mat,ultimaPosCad);
+            if (posicao!=-1)
+            {
+                
+                printf("\nDeseja alterar o nome? 1-SIM 2-Não");
+                scanf("%d",&alt);
+                if (alt==1)
+                {
+                    setbuf(stdin,NULL);
+                    printf("\nInsira a alteração para o nome.:");
+                    fgets(structFunc[posicao].nome,100,stdin);
+                    setbuf(stdin,NULL);
+                }
+                alt=0;
+                printf("\nDeseja alterar o salario?1-SIM 2-Não");
+                scanf("%d",&alt);
+                if (alt==1)
+                {
+                    printf("\nInsira a alteração para o Salario.:");
+                    scanf("%f",&structFunc[posicao].salario);
+                    alt=0;
+                }
+            }
+            else
+            {
+                printf("\nNenhum funcionario com esse numero de Matricula");
+            }
+            printf("\nContinuar as Alterações Sim -1 | Não - 2");
+            scanf("%d",&sair);
+        } while (sair!=2);
+    }
+}
+
+void funcRemocao (Tfuncionario structFunc[], int tamanho, int *ultimaPosCad){
+    int i,posicao,sair,mat,remocao;
+    if (*ultimaPosCad>=0)
+    {
+        do
+        {
+            printf("\nInsira a Matricula do funcionario a ser Removida.:");
+            scanf("%d",&mat);
+            posicao=funcCheckMatricula(structFunc,mat,*ultimaPosCad);
+            if (posicao!=-1)
+            {
+                printf("\nDeseja realmente remover a o funcionarios.:");
+                printf("\nNome.:%s",structFunc[posicao].nome);
+                printf("\nSalario.:%.2f",structFunc[posicao].salario);
+                printf("\n1-SIM/2/Não");
+                scanf("%d",&remocao);
+                if (remocao==1)
+                {
+                    structFunc[posicao]=structFunc[*ultimaPosCad];
+                    (*ultimaPosCad)--;
+                }
+            }
+            printf("\nContinuar a exclusão Sim -1 | Não - 2");
+            scanf("%d",&sair);
+        } while (sair!=2);
+    }
+    else
+    {
+        printf("\nSem cadastro de Funcionario!!!");
+    }
     
 }
 
 int main(){
     int menu;
     int ultimaPosCad;
-    Tfuncionario funcCheckMatricula[MAX];
+    Tfuncionario funcCheck[MAX];
     
     ultimaPosCad=-1;
     do
@@ -168,22 +260,22 @@ int main(){
         switch (menu)
         {
         case 1://cadastro
-            funcCadastro(funcCheckMatricula,MAX,&ultimaPosCad);
+            funcCadastro(funcCheck,MAX,&ultimaPosCad);
             break;
         case 2://Consulta matricula
-            funcConsulta(funcCheckMatricula,ultimaPosCad);
+            funcConsultaMat(funcCheck,ultimaPosCad);
             break;
         case 3://Consulta Nome
-            funcPesquisaNome (funcCheckMatricula,ultimaPosCad);
+            funcPesquisaNome (funcCheck,ultimaPosCad);
             break;
         case 4://Alteração
-            funcConsulta(funcCheckMatricula,ultimaPosCad);
+            funcAlteracao (funcCheck,ultimaPosCad);
             break;
         case 5://Exclusão
-            funcConsulta(funcCheckMatricula,ultimaPosCad);
+            funcRemocao (funcCheck,MAX,&ultimaPosCad);
             break;
         case 6://Listagem
-            funcConsulta(funcCheckMatricula,ultimaPosCad);
+            funcListagem (funcCheck,ultimaPosCad);
             break;
         default:
             break;

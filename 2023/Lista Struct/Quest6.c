@@ -19,21 +19,9 @@ com n votos, sendo n o número de votos.
 #define CHAPA 20
 
 typedef struct {
-    char nomeChapa[100],nomeResponsavel[100];
-    int votosChapa;
+    char sNnomeChapa[100],sNomeResponsavel[100];
+    int sVotosChapa;
 }Tchapas;//sChapas
-
-int pesquisaNome(Tchapas sChapas[],char nomeChapa,int tamanho){
-    int i;
-    for (i = 0; i < tamanho; i++)
-    {
-        if (strcmp(nomeChapa,sChapas[i].nomeChapa)==0)
-        {
-            return i;
-        }
-    }
-    return -1;    
-}
 
 void funcVotos (Tchapas sChapas[],int *tamanho){
     int votos,sair;
@@ -45,7 +33,7 @@ void funcVotos (Tchapas sChapas[],int *tamanho){
             scanf("%d",&votos);
             if (votos>0 && votos<=*tamanho)
             {
-                (sChapas[votos].votosChapa)++;  
+                (sChapas[votos].sVotosChapa)++;  
                 (*tamanho)++; 
             }
             else
@@ -58,7 +46,19 @@ void funcVotos (Tchapas sChapas[],int *tamanho){
     }
 }
 
-void funcCadastroChapa(Tchapas sChapas[],int *tamnho){
+int pesquisaNome(Tchapas sChapas[],char nomeChapa,int ultimoCadChapa){
+    int i;
+    for (i = 0; i <= ultimoCadChapa; i++)
+    {
+        if (strcmp(nomeChapa,sChapas[i].sNnomeChapa)==0)
+        {
+            return i;
+        }
+    }
+    return -1;    
+}
+
+void funcCadastroChapa(Tchapas sChapas[],int *ultimoCadChapa){
     int sair,i;
     char nomeCadChapa[100];
     int pesquisa;
@@ -72,14 +72,13 @@ void funcCadastroChapa(Tchapas sChapas[],int *tamnho){
         fgets(nomeCadChapa,100,stdin);
         setbuf(stdin,NULL);
         
-        pesquisa=pesquisaNome(sChapas,nomeCadChapa,CHAPA);
+        pesquisa=pesquisaNome(sChapas,nomeCadChapa,*ultimoCadChapa);
         if (pesquisa==-1)
         {
-            (*tamnho)++;
-            setbuf(stdin,NULL);   
-            strcpy(sChapas[i].nomeChapa,nomeCadChapa);      
+            (*ultimoCadChapa)++;
+            strcpy(sChapas[i].sNnomeChapa,nomeCadChapa);      
             printf("\nInsira o nome do Responsavel Pela Chapa.:");
-            fgets(sChapas[i].nomeResponsavel,100,stdin);
+            fgets(sChapas[i].sNomeResponsavel,100,stdin);
             setbuf(stdin,NULL);
             i++;
         }
@@ -97,27 +96,21 @@ int main(){
     Tchapas sChapas[CHAPA];
     int qtdVotos,qtdChapas;
     qtdVotos=0;
-    qtdChapas=0;
+    qtdChapas=-1;
     do
     {
         printf("\nProcesso Eleitoral.:");
-        printf("\n1-Votos Alunos | 2-Cadastro de Chapas");
+        printf("\n1-Cadastro de Chapas | 2-Votos Alunos");
         printf("\nInsita umas das opções.:");
         scanf("%d",&menu);
-        qtdChapas=-1;
         switch (menu)
         {
-        case 1://votos alunoss
-            if (qtdChapas>0)
-            {
-                funcCadastroChapa(sChapas,&qtdVotos);
-            }
-            
-            break;
-        case 2://cadastro de Chapa
+        case 1://cadastro de Chapa
             funcCadastroChapa(sChapas,&qtdChapas);
             break;
-        
+        case 2://votos alunos
+            funcCadastroChapa(sChapas,&qtdVotos);
+            break;
         default:
             break;
         }

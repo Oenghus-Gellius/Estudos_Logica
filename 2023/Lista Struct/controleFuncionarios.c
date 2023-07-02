@@ -79,7 +79,6 @@ void listagem(TFuncionario v[],int ultimaPosicao){
        printf("\nNenhum funcionÃ¡rio Cadastrado!!!\n");
 }
 
-
 void consultarMatricula(TFuncionario v[],int ultimaPosicao){
     int mat,sair,posicao;
     if(ultimaPosicao>=0){
@@ -104,7 +103,6 @@ void consultarMatricula(TFuncionario v[],int ultimaPosicao){
     else
        printf("\nNenhum FuncionÃ¡rio Cadastrado!!!!\n");
 }
-
 
 int pesquisaNome(TFuncionario v[],int ultimaPosicao,char nome[]){
     int i;

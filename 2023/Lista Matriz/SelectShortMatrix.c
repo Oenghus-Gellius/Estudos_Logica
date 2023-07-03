@@ -61,7 +61,7 @@ int main(){
     preenchMatriz (matrix,LIN,COL);
     printf("Matriz original:\n");
     printMatrix (matrix,LIN,COL);
-    printf("-----------------\n");
+    
     ordemandoMatrix(matrix,LIN,COL);
     printf("\nMatriz ordenada:\n");
     printMatrix (matrix,LIN,COL);

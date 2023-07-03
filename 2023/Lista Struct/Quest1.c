@@ -61,80 +61,23 @@ tipo_disciplinas disciplinas;
 typedef tipo_alunos tipo_alunos[30];
 tipo_alunos v;
 
-void funcChecRepete(char mat, tipo_aluno v[] ,int tamanho){
-    int i;
-    for (i = 0; i < tamanho; i++)
-    {
-        if (mat==v[i].nome)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-}
-
-void funcCadastro(){
-    int mat,i,k;
-    char nome;
-    for (i = 0; i < ALUNOS; i++)
-    {
-        printf("\nMatricula.:");
-        scanf("%d",&mat);
-        if (mat!=funcChecRepete(mat,v,ALUNOS))
-        {
-            printf("")
-        }
-        else
-        {
-            printf("matricula Repetida!!!");
-            i--;
-        }
-        
-        
-
-        if (/* condition */)
-        {
-            /* code */
-        }
-        
-    }
-
-    
-
-
-
-}
-
 int main(){
-    int menu;
+    int menu,ultAluno;
 
-    funcCadastro();
+    ultAluno==-1;
 
-    do
+    if (ultAluno<ALUNOS)
     {
-        printf("\n1 - Alunos Aprovados\n2 - Alunos Reprovados\n3 - Listagem\n4 - Fim");
-        printf("\nEscolha uma opção.:");
-        scanf("%d",&menu);
-        switch (menu)
-        {
-        case 1://Alunos aprovados
-            /* code */
-            break;
-        case 2://Alunos Reprovados
-            /* code */
-            break;
-        case 3://Listagem
-            /* code */
-            break;
-        default:
-            printf("Opção incorreta!");
-            break;
-        }
-    } while (menu!=4);
-    printf("\nOrigado pela consulta!!!");
+        printf("");
+    }
+    else
+    {
+        printf("\nTodos alunos cadastrados!!!");
+    }
+    
+    
+    printf("\nCadastro Alunos.:");
+
     
     return 0;
 }

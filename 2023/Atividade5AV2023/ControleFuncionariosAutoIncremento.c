@@ -159,6 +159,7 @@ void listagemFunPorDep(FILE *arqF,FILE *arqD){
         printf("Número de Funcionários do departamento = %d\n\n",soma);
     }
 }
+
 int comparacao(void *a,void *b){
     if(((TFuncionario*)a)->codDep>((TFuncionario*)b)->codDep)
         return 1;
@@ -168,6 +169,7 @@ int comparacao(void *a,void *b){
         else
             return 0;
 }
+
 void listagem(FILE *arqF,FILE *arqD){
     TFuncionario *v,rf;
     int tamanho,i;
@@ -187,6 +189,7 @@ void listagem(FILE *arqF,FILE *arqD){
     else
         printf("\nGame Over!!!\n");
 }
+
 int main(){
     FILE *arqDep,*arqFun;
     int opcao;
@@ -223,6 +226,6 @@ int main(){
                 listagem(arqFun,arqDep);
                 break;
         }
-    }while(opcao!=6)   ;
+    }while(opcao!=6);
     return 0;
 }

@@ -164,14 +164,11 @@ void resultado (FILE *arqChapa)
         printf("\nNome do responsável: %s", sCampea.sNomeResponsavel);
         printf("\nNúmero de votos: %d", sCampea.sNumVotos);        
 
-
         if (count > 0)
         {
             printf("\nChapas empatadas com %d votos!", maxVotos);
         }
         
-        
-
         printf("\nEncerrar a Apuração? 1-Não | 2-SIM");
         scanf("%d",&sair);
     } while (sair!=2);

@@ -1,216 +1,151 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <locale.h>
+#define ALUNOS 30
+#define DISCIPLINAS 10
+#define BIMESTRES 4
 
-typedef struct
-{
-    char sNomeChapa[100];
-    char sNomeResponsavel[100];
-    int sNumVotos;
-    int sNumChapa;
-} TChapasDA;
+typedef struct {
+    float nota;
+    int falta;
+} tipo_bimestre;
 
-int checkRepNome(FILE *arqChapa, char *nomChapa)
-{
-    TChapasDA sChapas;
-    rewind(arqChapa);
-    while (fread(&sChapas, sizeof(TChapasDA), 1, arqChapa) == 1)
-    {
-        if (strcmp(sChapas.sNomeChapa, nomChapa) == 0)
-        {
-            return 1;
-        }
-    }
-    return 0;
-}
+typedef tipo_bimestre tipo_bimestres[BIMESTRES];
 
-void cadChapas(FILE *arqChapa)
-{
-    TChapasDA sChapas;
-    char nomChapa[100];
-    int sair;
+typedef struct {
+    char nome[30];
+    tipo_bimestres bimestres;
+} tipo_disciplina;
 
-    fseek(arqChapa, 0, SEEK_END);
+typedef tipo_disciplina tipo_disciplinas[DISCIPLINAS];
 
-    do
-    {
-        printf("\nInsira o nome da CHAPA.: ");
-        setbuf(stdin, NULL);
-        fgets(nomChapa, sizeof(nomChapa), stdin);
-        setbuf(stdin, NULL);
+typedef struct {
+    int matricula;
+    char nome[50];
+    tipo_disciplinas disciplinas;
+} tipo_aluno;
 
-        if (checkRepNome(arqChapa, nomChapa) == 1)
-        {
-            printf("\nChapa já registrada!");
-        }
-        else
-        {
-            sChapas.sNumChapa = ftell(arqChapa) / sizeof(TChapasDA);
-            strcpy(sChapas.sNomeChapa, nomChapa);
-            printf("\nInsira o nome do responsável: ");
-            fgets(sChapas.sNomeResponsavel, sizeof(sChapas.sNomeResponsavel), stdin);
-            sChapas.sNumVotos = 0;
+typedef tipo_aluno tipo_alunos[ALUNOS];
+tipo_alunos v;
 
-            fseek(arqChapa, 0, SEEK_END);
-            fwrite(&sChapas, sizeof(TChapasDA), 1, arqChapa);
-            printf("\nChapa cadastrada com sucesso!");
-        }
+void preencherInformacoes() {
+    for (int i = 0; i < ALUNOS; i++) {
+        printf("\n--- Aluno %d ---\n", i + 1);
+        printf("Digite a matrícula: ");
+        scanf("%d", &v[i].matricula);
+        printf("Digite o nome: ");
+        scanf(" %[^\n]s", v[i].nome);
 
-        printf("\nEncerrar o Cadastro de Chapas? 1-Não | 2-SIM: ");
-        scanf("%d", &sair);
-    } while (sair != 2);
-}
+        for (int j = 0; j < DISCIPLINAS; j++) {
+            printf("Disciplina %d:\n", j + 1);
 
-void votos(FILE *arqChapa)
-{
-    TChapasDA sChapas;
-    int voto, sair;
-    int encontrado = 0;
-
-    printf("\nELEIÇÕES IFET");
-
-    do
-    {
-        printf("\nCHAPAS");
-        printf("\nNumero\t\tNome Chapa\t\tResponsavel");
-
-        fseek(arqChapa, 0, SEEK_END);
-
-        if (ftell(arqChapa) / sizeof(TChapasDA) == 0)
-        {
-            printf("\nSem Chapa cadastrada!\n");
-            return;
-        }
-
-        rewind(arqChapa);
-
-        while (fread(&sChapas, sizeof(TChapasDA), 1, arqChapa) == 1)
-        {
-            printf("\n%d\t\t%s\t\t%s", sChapas.sNumChapa, sChapas.sNomeChapa, sChapas.sNomeResponsavel);
-        }
-
-        printf("\nInsira o número referente à Chapa para registrar seu voto: ");
-        scanf("%d", &voto);
-
-        rewind(arqChapa);
-
-        while (fread(&sChapas, sizeof(TChapasDA), 1, arqChapa) == 1)
-        {
-            if (voto == sChapas.sNumChapa)
-            {
-                sChapas.sNumVotos++;
-                encontrado = 1;
-                fseek(arqChapa, -sizeof(TChapasDA), SEEK_CUR);
-                fwrite(&sChapas, sizeof(TChapasDA), 1, arqChapa);
-                printf("\nVoto registrado com sucesso!");
-                break;
+            for (int k = 0; k < BIMESTRES; k++) {
+                printf("Digite a nota do bimestre %d: ", k + 1);
+                scanf("%f", &v[i].disciplinas[j].bimestres[k].nota);
+                printf("Digite o número de faltas do bimestre %d: ", k + 1);
+                scanf("%d", &v[i].disciplinas[j].bimestres[k].falta);
             }
         }
-
-        if (!encontrado)
-        {
-            printf("\nNúmero de Chapa inválido!");
-        }
-
-        printf("\nEncerrar o processo eleitoral? 1-Não | 2-SIM: ");
-        scanf("%d", &sair);
-    } while (sair != 2);
-}
-
-void resultado(FILE *arqChapa)
-{
-    TChapasDA sChapas;
-    TChapasDA sCampea;
-    int campea, count, sair;
-    int maxVotos = 0;
-    int empate = 0;
-
-    rewind(arqChapa);
-
-    do
-    {
-        printf("\nResultado das Eleições:");
-
-        while (fread(&sChapas, sizeof(TChapasDA), 1, arqChapa) == 1)
-        {
-            if (maxVotos < sChapas.sNumVotos)
-            {
-                maxVotos = sChapas.sNumVotos;
-                sCampea = sChapas;
-                count = 0;
-            }
-            else if (maxVotos == sChapas.sNumVotos)
-            {
-                count++;
-            }
-        }
-
-        printf("\n----- CHAPA CAMPEÃ -----");
-        printf("\nNome da Chapa: %s", sCampea.sNomeChapa);
-        printf("\nNome do responsável: %s", sCampea.sNomeResponsavel);
-        printf("\nNúmero de votos: %d", sCampea.sNumVotos);
-
-        if (count > 0)
-        {
-            empate = 1;
-            printf("\nChapas empatadas com %d votos!", maxVotos);
-        }
-
-        printf("\nEncerrar a Apuração? 1-Não | 2-SIM: ");
-        scanf("%d", &sair);
-    } while (sair != 2);
-
-    if (empate)
-    {
-        printf("\nOcorreu um empate na eleição!");
     }
 }
 
-int main()
-{
-    FILE *arqChapa;
+float calcularMediaDisciplina(tipo_disciplina disciplina) {
+    float somaNotas = 0;
+
+    for (int i = 0; i < BIMESTRES; i++) {
+        somaNotas += disciplina.bimestres[i].nota;
+    }
+
+    return somaNotas / BIMESTRES;
+}
+
+float calcularMediaAluno(tipo_aluno aluno) {
+    float somaMedias = 0;
+
+    for (int i = 0; i < DISCIPLINAS; i++) {
+        somaMedias += calcularMediaDisciplina(aluno.disciplinas[i]);
+    }
+
+    return somaMedias / DISCIPLINAS;
+}
+
+void mostrarAlunosAprovados() {
+    printf("\n--- Alunos Aprovados ---\n");
+
+    for (int i = 0; i < ALUNOS; i++) {
+        tipo_aluno aluno = v[i];
+        float mediaAluno = calcularMediaAluno(aluno);
+
+        if (mediaAluno >= 60) {
+            printf("Matrícula: %d\n", aluno.matricula);
+            printf("Nome: %s\n", aluno.nome);
+            printf("Média Final: %.2f\n\n", mediaAluno);
+        }
+    }
+}
+
+void mostrarAlunosReprovados() {
+    printf("\n--- Alunos Reprovados ---\n");
+
+    for (int i = 0; i < ALUNOS; i++) {
+        tipo_aluno aluno = v[i];
+        float mediaAluno = calcularMediaAluno(aluno);
+
+        if (mediaAluno < 60) {
+            printf("Matrícula: %d\n", aluno.matricula);
+            printf("Nome: %s\n", aluno.nome);
+            printf("Média Final: %.2f\n\n", mediaAluno);
+        }
+    }
+}
+
+void listarAlunos() {
+    printf("\n--- Lista de Alunos ---\n");
+
+    for (int i = 0; i < ALUNOS; i++) {
+        tipo_aluno aluno = v[i];
+        printf("Matrícula: %d\n", aluno.matricula);
+        printf("Nome: %s\n\n", aluno.nome);
+    }
+}
+
+int main() {
     int menu, sair;
 
-    setlocale(LC_ALL, "");
-
-    arqChapa = fopen("ChapasDA.dat", "rb+");
-
-    if (arqChapa == NULL)
-    {
-        arqChapa = fopen("ChapasDA.dat", "wb+");
-    }
-
-    do
-    {
-        printf("\nEleições IFET");
+    do {
         printf("\nEscolha uma das opções do menu:");
-        printf("\n1 - Cadastro de Chapas");
-        printf("\n2 - Votar nas Chapas");
-        printf("\n3 - Listagem de Votos");
+        printf("\n1 - Cadastro de Aluno");
+        printf("\n2 - Alunos Aprovados");
+        printf("\n3 - Alunos Reprovados");
+        printf("\n4 - Listagem de Alunos");
+        printf("\n5 - Fim");
+        printf("\nEscolha uma das opções: ");
         scanf("%d", &menu);
 
-        switch (menu)
-        {
-        case 1:
-            cadChapas(arqChapa);
-            break;
-        case 2:
-            votos(arqChapa);
-            break;
-        case 3:
-            resultado(arqChapa);
-            break;
-        default:
-            break;
+        switch (menu) {
+            case 1:
+                preencherInformacoes();
+                break;
+            case 2:
+                mostrarAlunosAprovados();
+                break;
+            case 3:
+                mostrarAlunosReprovados();
+                break;
+            case 4:
+                listarAlunos();
+                break;
+            case 5:
+                sair = 1;
+                break;
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+                break;
         }
 
-        printf("\nEncerrar o programa? 1-Não | 2-SIM: ");
+        printf("Encerrar o programa? 1-Não | 2-Sim: ");
         scanf("%d", &sair);
     } while (sair != 2);
 
-    fclose(arqChapa);
-    printf("\nObrigado!");
-
     return 0;
 }
+
